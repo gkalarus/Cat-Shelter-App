@@ -22250,7 +22250,7 @@ var SearchBar = function (_React$Component) {
                     _react2.default.createElement(
                         "label",
                         null,
-                        _react2.default.createElement("input", { type: "text" })
+                        _react2.default.createElement("input", { type: "text", placeholder: "Search..." })
                     )
                 ),
                 _react2.default.createElement(

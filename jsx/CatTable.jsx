@@ -3,20 +3,31 @@ import CategoryRow from './CategoryRow.jsx';
 import CatRow from './CatRow.jsx'
 
 class CatTable extends React.Component{
+
     render() {
 
         let rows = [];
         let lastCategory = null;
-        this.props.kitties.forEach(kitty => {
-            if(kitty.category !== lastCategory) {
-                rows.push(<CategoryRow category={kitty.category} key={kitty.category}/>)
-            }
-            rows.push(<CatRow kitty={kitty} key={kitty.name}/>);
-            lastCategory = kitty.category;
-        });
-
-
-        console.log(rows);
+        if(!this.props.likesKids){
+            this.props.kitties.forEach(kitty => {
+                if(kitty.category !== lastCategory) {
+                    rows.push(<CategoryRow category={kitty.category} key={kitty.category}/>)
+                }
+                rows.push(<CatRow kitty={kitty} key={kitty.name}/>);
+                lastCategory = kitty.category;
+            });
+        }else {
+            this.props.kitties.forEach(kitty => {
+                if(kitty.category !== lastCategory) {
+                    rows.push(<CategoryRow category={kitty.category} key={kitty.category}/>)
+                }
+                rows.push(<CatRow kitty={kitty} key={kitty.name}/>);
+                lastCategory = kitty.category;
+                if(!kitty.likesKids){
+                    rows.pop()
+                }
+            })
+        }
 
         return (
             <table>

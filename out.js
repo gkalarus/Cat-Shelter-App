@@ -22176,20 +22176,49 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
-    function App() {
+    function App(props) {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+        _this.handleTextChange = function (event) {
+            _this.setState({
+                filterText: event.target.value
+            });
+        };
+
+        _this.handleCheckboxChange = function () {
+            _this.setState({
+                likesKids: !_this.state.likesKids
+            });
+        };
+
+        _this.state = {
+            filterText: '',
+            likesKids: false
+        };
+        return _this;
     }
 
     _createClass(App, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            var kitties = this.props.kitties.filter(function (kitty) {
+                var name = kitty.name.toLowerCase();
+                var text = _this2.state.filterText.toLowerCase();
+                if (text.length > 0 && name.indexOf(text) === -1) {
+                    return false;
+                }
+                return true;
+            });
+
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_SearchBar2.default, null),
-                _react2.default.createElement(_CatTable2.default, { kitties: this.props.kitties })
+                _react2.default.createElement(_SearchBar2.default, { onTextChange: this.handleTextChange, onCheckboxChange: this.handleCheckboxChange, filterText: this.state.filterText, likesKids: this.state.likesKids }),
+                _react2.default.createElement(_CatTable2.default, { likesKids: this.state.likesKids, kitties: kitties })
             );
         }
     }]);
@@ -22236,6 +22265,7 @@ var SearchBar = function (_React$Component) {
     _createClass(SearchBar, [{
         key: "render",
         value: function render() {
+
             return _react2.default.createElement(
                 "form",
                 null,
@@ -22245,7 +22275,7 @@ var SearchBar = function (_React$Component) {
                     _react2.default.createElement(
                         "label",
                         null,
-                        _react2.default.createElement("input", { type: "text" })
+                        _react2.default.createElement("input", { onChange: this.props.onTextChange, value: this.props.filterText, type: "text", placeholder: "Search..." })
                     )
                 ),
                 _react2.default.createElement(
@@ -22254,7 +22284,7 @@ var SearchBar = function (_React$Component) {
                     _react2.default.createElement(
                         "label",
                         null,
-                        _react2.default.createElement("input", { type: "checkbox" }),
+                        _react2.default.createElement("input", { onChange: this.props.onCheckboxChange, checked: this.props.likesKids, type: "checkbox" }),
                         "Only show cats that like kids"
                     )
                 )
@@ -22315,15 +22345,26 @@ var CatTable = function (_React$Component) {
 
             var rows = [];
             var lastCategory = null;
-            this.props.kitties.forEach(function (kitty) {
-                if (kitty.category !== lastCategory) {
-                    rows.push(_react2.default.createElement(_CategoryRow2.default, { category: kitty.category, key: kitty.category }));
-                }
-                rows.push(_react2.default.createElement(_CatRow2.default, { kitty: kitty, key: kitty.name }));
-                lastCategory = kitty.category;
-            });
-
-            console.log(rows);
+            if (!this.props.likesKids) {
+                this.props.kitties.forEach(function (kitty) {
+                    if (kitty.category !== lastCategory) {
+                        rows.push(_react2.default.createElement(_CategoryRow2.default, { category: kitty.category, key: kitty.category }));
+                    }
+                    rows.push(_react2.default.createElement(_CatRow2.default, { kitty: kitty, key: kitty.name }));
+                    lastCategory = kitty.category;
+                });
+            } else {
+                this.props.kitties.forEach(function (kitty) {
+                    if (kitty.category !== lastCategory) {
+                        rows.push(_react2.default.createElement(_CategoryRow2.default, { category: kitty.category, key: kitty.category }));
+                    }
+                    rows.push(_react2.default.createElement(_CatRow2.default, { kitty: kitty, key: kitty.name }));
+                    lastCategory = kitty.category;
+                    if (!kitty.likesKids) {
+                        rows.pop();
+                    }
+                });
+            }
 
             return _react2.default.createElement(
                 'table',
