@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchBar from './SearchBar.jsx';
-import CatTable from './CatTable.jsx'
+import SearchBar from './SearchBar.js';
+import CatTable from './CatTable.js'
 
 
 class App extends React.Component {

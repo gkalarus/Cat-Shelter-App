@@ -1,19 +1,27 @@
+const path = require('path')
+
 module.exports = {
-    entry: "./app.jsx",
-    output: {
-        filename: "./out.js"
-    },
-    watch: true,
-    devtool: 'source-map',
-    module: {
-        loaders: [{
-            test: /\.jsx$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            query: {
-                presets: ['es2015', 'stage-2', 'react']
-            }
-        }
-        ]
-    }
-}
+  entry: './src/app.js',
+  output: {
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js'
+  }, 
+  module: {
+    rules: [{
+        loader: 'babel-loader',
+        test: /\.js$/,
+        exclude: /node_modules/
+    }, {
+      test: /\.s?css$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'sass-loader'
+      ]
+    }]
+  },
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'public')
+  }
+};

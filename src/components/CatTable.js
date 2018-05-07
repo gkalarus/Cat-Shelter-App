@@ -1,6 +1,6 @@
 import React from 'react';
-import CategoryRow from './CategoryRow.jsx';
-import CatRow from './CatRow.jsx'
+import CategoryRow from './CategoryRow.js';
+import CatRow from './CatRow.js'
 
 class CatTable extends React.Component{
 
