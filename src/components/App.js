@@ -37,7 +37,7 @@ class App extends React.Component {
         });
 
         return (
-            <div>
+            <div id="shelter">
                 <SearchBar onTextChange={this.handleTextChange} onCheckboxChange={this.handleCheckboxChange} filterText={this.state.filterText} likesKids={this.state.likesKids}/>
                 <CatTable likesKids={this.state.likesKids} kitties={kitties}/>
             </div>
