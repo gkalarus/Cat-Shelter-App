@@ -4,7 +4,7 @@ class CategoryRow extends React.Component{
     render() {
         return (
             <tr>
-                <th colSpan="2">{this.props.category}</th>
+                <th className="categoryRow" colSpan="2">{this.props.category}</th>
             </tr>
         )
     }

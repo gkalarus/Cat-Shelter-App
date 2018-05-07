@@ -33,8 +33,8 @@ class CatTable extends React.Component{
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Age</th>
+                        <th className="nameHeader">Name</th>
+                        <th className="ageHeader">Age</th>
                     </tr>
                 </thead>
                 <tbody>

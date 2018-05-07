@@ -1,5 +1,21 @@
 table {
     border-radius: 8px;
     padding: 30px;
-    border: 2px dashed black;
+    background-color: $color-primary;
+    
+    .nameHeader {
+        background-color: $color-secondary-dark;
+        color: $color-primary;
+    }
+    .ageHeader {
+        background-color: $color-secondary-dark;
+        color: $color-primary;
+    }
+    .categoryRow {
+        background-color: $color-secondary-light;
+        color: $color-primary;
+    }
+    .ageCell {
+        text-align: center;
+    }
 }

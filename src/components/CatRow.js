@@ -7,8 +7,8 @@ class CatRow extends React.Component{
 
         return (
             <tr>
-                <td>{name}</td>
-                <td>{this.props.kitty.age}</td>
+                <td className="nameCell">{name}</td>
+                <td className="ageCell">{this.props.kitty.age}</td>
             </tr>
         )
     }
