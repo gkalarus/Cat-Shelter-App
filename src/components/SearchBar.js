@@ -7,12 +7,12 @@ class SearchBar extends React.Component{
         return (
             <form>
                 <div>
-                    <label>
+                    <label className="searchInput">
                         <input onChange={this.props.onTextChange} value={this.props.filterText} type="text" placeholder="Search..."/>
                     </label>
                 </div>
                 <div>
-                    <label>
+                    <label className="checkboxInput">
                         <input onChange={this.props.onCheckboxChange} checked={this.props.likesKids} type="checkbox"/>
                         Only show cats that like kids
                     </label>

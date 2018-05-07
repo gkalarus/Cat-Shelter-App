@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",
+    "prebuild": "npm run clean",
     "build": "webpack",
+    "clean": "rimraf public",
     "dev-server": "webpack-dev-server"
   },
   "dependencies": {
@@ -27,6 +29,7 @@
     "style-loader": "0.18.2",
     "validator": "8.0.0",
     "webpack": "3.1.0",
-    "webpack-dev-server": "2.5.1"
+    "webpack-dev-server": "2.5.1",
+    "rimraf": "^2.6.1"
   }
 }
